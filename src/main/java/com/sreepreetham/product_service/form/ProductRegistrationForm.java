@@ -17,5 +17,7 @@ public class ProductRegistrationForm {
   @NotBlank private String name;
   @NotBlank private String description;
   @NotBlank private BigDecimal price;
-  private float rating = 0;
+  @Builder.Default private float rating = 0;
+  @NotBlank private String category;
+  @Builder.Default private Boolean inStock = true;
 }

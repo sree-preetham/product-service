@@ -13,18 +13,22 @@ import java.util.UUID;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class ProductRegister {
+public class ProductDto {
   private UUID id;
   private String name;
   private String description;
   private BigDecimal price;
   private float rating;
+  private String category;
+  private Boolean inStock;
 
-  public ProductRegister(Product product) {
+  public ProductDto(Product product) {
     this.id = product.getId();
     this.name = product.getName();
     this.description = product.getDescription();
     this.price = product.getPrice();
     this.rating = product.getRating();
+    this.category = product.getCategory();
+    this.inStock = product.getInStock();
   }
 }

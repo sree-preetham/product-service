@@ -21,4 +21,6 @@ public class Product {
   private String description;
   private BigDecimal price;
   private float rating;
+  private String category;
+  private Boolean inStock;
 }

@@ -1,6 +1,7 @@
 package com.sreepreetham.product_service.service;
 
-import com.sreepreetham.product_service.dto.ProductRegister;
+import com.sreepreetham.product_service.dto.ProductDto;
+import com.sreepreetham.product_service.dto.ProductsListDto;
 import com.sreepreetham.product_service.entity.Product;
 import com.sreepreetham.product_service.form.ProductRegistrationForm;
 import com.sreepreetham.product_service.repository.ProductRepository;
@@ -8,6 +9,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.UUID;
 
 @Service
@@ -16,7 +18,7 @@ import java.util.UUID;
 public class ProductService {
   private final ProductRepository productRepository;
 
-  public ProductRegister registerProduct(ProductRegistrationForm form) {
+  public ProductDto registerProduct(ProductRegistrationForm form) {
     Product product =
         Product.builder()
             .name(form.getName())
@@ -24,9 +26,20 @@ public class ProductService {
             .id(UUID.randomUUID())
             .price(form.getPrice())
             .rating(form.getRating())
+            .category(form.getCategory())
+            .inStock(form.getInStock())
             .build();
     productRepository.save(product);
     log.info("Product {} is saved", product.getId());
-    return new ProductRegister(product);
+    return new ProductDto(product);
+  }
+
+  public ProductsListDto getAllProducts() {
+    List<Product> products = productRepository.findAll();
+    ProductsListDto productsListDto = new ProductsListDto();
+    for (Product product : products) {
+      productsListDto.getProductsList().add(new ProductDto(product));
+    }
+    return productsListDto;
   }
 }
