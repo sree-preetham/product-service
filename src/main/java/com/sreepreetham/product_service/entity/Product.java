@@ -20,7 +20,7 @@ public class Product {
   private String name;
   private String description;
   private BigDecimal price;
-  private float rating;
+  private double rating;
   private String category;
   private Boolean inStock;
 }
