@@ -3,6 +3,7 @@ package com.sreepreetham.product_service.service;
 import com.sreepreetham.product_service.dto.ProductDto;
 import com.sreepreetham.product_service.dto.ProductsListDto;
 import com.sreepreetham.product_service.entity.Product;
+import com.sreepreetham.product_service.exception.ProductNotFoundException;
 import com.sreepreetham.product_service.form.ProductRegistrationForm;
 import com.sreepreetham.product_service.repository.ProductRepository;
 import lombok.RequiredArgsConstructor;
@@ -41,5 +42,13 @@ public class ProductService {
       productsListDto.getProductsList().add(new ProductDto(product));
     }
     return productsListDto;
+  }
+
+  public ProductDto findProductById(UUID uuid) {
+    Product product =
+        productRepository
+            .findById(uuid)
+            .orElseThrow(() -> new ProductNotFoundException("Product not found with id: " + uuid));
+    return new ProductDto(product);
   }
 }

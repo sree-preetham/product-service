@@ -10,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.UUID;
 
 @RestController
 @RequestMapping("/api/products")
@@ -27,5 +28,11 @@ public class ProductController {
   ResponseEntity<ProductsListDto> getAllProducts() {
     ProductsListDto products = productService.getAllProducts();
     return ResponseEntity.status(HttpStatus.OK).body(products);
+  }
+
+  @GetMapping("/{id}")
+  ResponseEntity<ProductDto> getProductById(@PathVariable("id") UUID uuid){
+    ProductDto productDto = productService.findProductById(uuid);
+    return ResponseEntity.status(HttpStatus.OK).body(productDto);
   }
 }
