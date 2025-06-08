@@ -30,8 +30,8 @@ public class ProductController {
     return ResponseEntity.status(HttpStatus.OK).body(products);
   }
 
-  @GetMapping("/{id}")
-  ResponseEntity<ProductDto> getProductById(@PathVariable("id") UUID uuid){
+  @GetMapping("/{uuid}")
+  ResponseEntity<ProductDto> getProductById(@PathVariable("uuid") UUID uuid){
     ProductDto productDto = productService.findProductById(uuid);
     return ResponseEntity.status(HttpStatus.OK).body(productDto);
   }
